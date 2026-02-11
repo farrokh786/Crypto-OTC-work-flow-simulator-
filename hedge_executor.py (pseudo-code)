@@ -1,0 +1,12 @@
+def hedge_order(total_size, venues, clip=10):
+    remaining = total_size
+    fills = []
+
+    while remaining > 0:
+        size = min(clip, remaining)
+        venue = select_best_venue(venues)
+        fill = execute_order(venue, size)
+        fills.append(fill)
+        remaining -= size
+
+    return fills
